@@ -6,7 +6,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
@@ -15,9 +15,8 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot' 
 apply plugin: 'war'
 
-
 war {
-	baseName = 'document'
+	baseName = 'readymade-document'
 	version = '1.0'
 }
 sourceCompatibility = 1.8
