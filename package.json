@@ -1,0 +1,22 @@
+{
+  "name": "readymade-document",
+  "version": "1.0.0",
+  "description": "![readymade](http://i.imgur.com/kcQetn5.png?1)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fairesy/readymade-document.git"
+  },
+  "author": "shinyoung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fairesy/readymade-document/issues"
+  },
+  "homepage": "https://github.com/fairesy/readymade-document#readme",
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
