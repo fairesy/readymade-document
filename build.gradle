@@ -10,9 +10,8 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot' 
-apply plugin: 'war'
 
-war {
+jar {
 	baseName = 'document'
 	version = '1.0'
 }
