@@ -69,7 +69,15 @@
 			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
 			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
 			<button class="btn-login" type="submit" name="action">login</button>
-			<button class="btn-join" th:href="@{/users/form}">join</button>
+			<a class="btn-join" th:href="@{#/users/form}">join</a>
+		</form>
+    </div>
+    <div class="join-modal">
+    	<form id="join-form" method="post" th:action="@{/users/join}">
+    		<input id="email" type="text" name="name" placeholder="이름을 입력해주세요">
+			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
+			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
+			<button class="btn-join" th:href="@{/users/join}">join</button>
 		</form>
     </div>
     <script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
