@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'DINRegular';
+    src: url('../../fonts/din-regular-webfont.eot');
+    src: url('../../fonts/din-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/din-regular-webfont.woff') format('woff'),
+         url('../../fonts/din-regular-webfont.svg#DINRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DINMedium';
+    src: url('../../fonts/din-medium-webfont.eot');
+    src: url('../../fonts/din-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/din-medium-webfont.woff') format('woff'),
+         url('../../fonts/din-medium-webfont.svg#DINRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DINBlack';
+    src: url('../../fonts/dinpro-black-webfont.eot');
+    src: url('../../fonts/dinpro-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/dinpro-black-webfont.woff') format('woff'),
+         url('../../fonts/dinpro-black-webfont.svg#DINBlack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

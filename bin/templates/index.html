@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>ready-made document</title>
+	<meta charset="UTF-8">
+	<title>ready-made document</title>
+	<link rel="stylesheet" th:href="@{/styles/font.css}" media="screen">
+	<link rel="stylesheet" th:href="@{/styles/index.css}" media="screen">
+	<link rel="stylesheet" th:href="@{/styles/index_print.css}" media="print">
 </head>
 <body>
-	<h1>2016년 5월 5일</h1>
-	<h2>그냥 스프링으로 어떻게 프로젝트를 시작해야하는 건지 모르겠다ㅠㅠㅠㅠ 결국 스프링 부트로 시작하고 개미만큼 위안을...</h2>
-	<a th:href="@{'http://www.html2pdf.it/?url='+'www.naver.com'}">print test!</a>
+	<nav>
+      <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
+      <a href="#introduction"></a>
+        <div class="title">ready-made document</div>
+      
+      <a href="#login"></a>
+        <div class="login">login</div>
+      
+      <div class="copyright">&copy;sososimsim</div>
+      <a href="#contact"></a>
+        <div class="contact">contact</div>
+      
+    </nav>
+    <div id="main">
+      <div class="card-wrapper">
+        <div class="card-name">
+          <span class="top">who are</span>
+          <span class="bottom">you</span>
+        </div>
+        <div id="personal"class="card">
+          <!-- <div class="grain"></div> -->
+          <div class="contents personal-info">
+            <input type="text" placeholder="이름을 알려주세요">
+            <input type="text" placeholder="영어이름은요?">
+            <input type="text" placeholder="메일 보낼 주소를 알려주세요">
+            <input type="text" placeholder="그리고 전화번호도요!">
+          </div>
+          <a href="#personal"></a>
+          <div class="label personal">
+            <span>personal</span>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <div class="grain"></div> -->
+          <div class="contents"></div>
+          <a href="#education"></a>
+          <div class="label education">
+            <span>education</span>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <div class="grain"></div> -->
+          <div class="contents"></div>
+          <a href="#experience"></a>
+          <div class="label experience">
+            <span>experience</span>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <div class="grain"></div> -->
+          <div class="contents"></div>
+          <a href="#skills"></a>
+          <div class="label skills">
+            <span>skills</span>
+          </div>
+        </div>
+      </div>
+      <div class="print-button">
+        <div class="grain"></div>
+        <div class="label">print</div>
+      </div>
+    </div>
 	<script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
 	<script th:src="@{/scripts/index.js}"></script>
 </body>
