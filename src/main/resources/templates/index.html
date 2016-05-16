@@ -10,16 +10,10 @@
 <body>
 	<nav>
       <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
-      <a href="#introduction"></a>
-        <div class="title">ready-made document</div>
-      
-      <a href="#login"></a>
-        <div class="login">login</div>
-      
+      <a class="title" href="#/introduction">ready-made document</a>
+      <a class="login" href="#/login">login</a>
       <div class="copyright">&copy;sososimsim</div>
-      <a href="#contact"></a>
-        <div class="contact">contact</div>
-      
+      <a class="contact" href="#/contact">contact</a>
     </nav>
     <div id="main">
       <div class="card-wrapper">
@@ -70,7 +64,16 @@
         <div class="label">print</div>
       </div>
     </div>
-	<script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
-	<script th:src="@{/scripts/index.js}"></script>
+    <div class="login-modal">
+    	<form id="login-form" method="post" th:action="@{/users/login}">
+			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
+			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
+			<button class="btn-login" type="submit" name="action">login</button>
+			<button class="btn-join" th:href="@{/users/form}">join</button>
+		</form>
+    </div>
+    <script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
+	<script th:src="@{/lib/node_modules/director/build/director.js}"></script>
+	<script th:src="@{/scripts/app.js}"></script>
 </body>
 </html>
