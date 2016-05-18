@@ -23,11 +23,11 @@ public class UserController {
 		
 		//Model에 담은 데이터를 데이터베이스에 넘겨준다.
 		try {
-			userDao.insert(user);
+			User joinedUser = userDao.insert(user);
+			System.out.println(joinedUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		//다 하고 나면 로그인 화면으로 가기! 
 		return "redirect:/#/login";
 	}
