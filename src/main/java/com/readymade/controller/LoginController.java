@@ -18,8 +18,7 @@ public class LoginController {
 	UserDao userDao;
 	
 	@RequestMapping(value="/users/login", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session){
-		ModelAndView mav;
+	public String login(@RequestParam String email, @RequestParam String password, HttpSession session){
 		
 		//id(email),pw 확인하기
 		User user = userDao.findByEmail(email);
@@ -27,20 +26,15 @@ public class LoginController {
 			if(password.equals(user.getPassword())){
 				//로그인 성공 : session에 로그인한 유저 정보 담아서 보내기 
 				session.setAttribute("user", user);
-				mav = new ModelAndView("index");
+				return "redirect:/";
 			}else{
 				//password 불일치 
-				mav = new ModelAndView("redirect:/#/login");
+				return "redirect:/#/login";
 			}
 		}else{
 			//해당 이메일로 가입된 유저 없음 
-			mav = new ModelAndView("redirect:/#/login");
+			return "redirect:/#/login";
 		}
-		
-		session.setAttribute("user", user);
-		
 		//TODO "패스워드가 일치하지 않습니다", "가입된 유저가 아닙니다" 등 메시지 출력
-		
-		return mav;
 	}
 }

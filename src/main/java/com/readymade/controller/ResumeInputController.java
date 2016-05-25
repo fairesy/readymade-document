@@ -34,9 +34,11 @@ public class ResumeInputController {
 		String data = name_ko + name_en + email + phone;
 		System.out.println("session : " + session.getAttribute("user"));
 		
-		Integer document_id = documentDao.findByUserId(1).getId();//test data. documentDao에서 documentId 얻어오는 방식 고민 
+//		Integer document_id = documentDao.findByUserId(1).getId();//test data. documentDao에서 documentId 얻어오는 방식 고민 
+		Integer document_id = 1;
 		
 		Module personalModule = new Module(moduleType, data, document_id);
+		//TODO 처음엔 insert, 그 다음부턴 update........
 //		try {
 //			moduleDao.insert(personalModule);
 //		} catch (Exception e) {

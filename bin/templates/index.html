@@ -25,13 +25,13 @@
           <span class="top">who are</span>
           <span class="bottom">you</span>
         </div>
-        <div id="personal" class="card">
+        <div id="personal" class="card selected-card">
           <!-- <div class="grain"></div> -->
           <div class="contents personal-info">
           	<form id="resume-personal-form" th:if="${session.user != null}" th:action="@{/resume/data/personal}" method="post">
 	            <input type="text" name="name_ko" th:value="${session.user.name}" placeholder="이름을 알려주세요">
 	            <input type="text" name="name_en" placeholder="영어이름은요?">
-	            <input type="email" name="email" placeholder="메일 보낼 주소를 알려주세요">
+	            <input type="email" name="email" th:value="${session.user.email}" placeholder="메일 보낼 주소를 알려주세요">
 	            <input type="text" name="phone" placeholder="그리고 전화번호도요!">
 	            <input type="submit" value="next">
             </form>
@@ -43,7 +43,16 @@
         </div>
         <div id="education" class="card">
           <!-- <div class="grain"></div> -->
-          <div class="contents"></div>
+          <div class="contents education">
+          	<form id="resume-education-form" th:if="${session.user != null}" th:action="@{/resume/data/education}" method="post">
+	            <input type="text" name="name" placeholder="배운 곳 이름이 뭔가요?">
+	            <input type="text" name="major" placeholder="전공은?">
+	            <input type="text" name="state" placeholder="현재 상태(재학/휴학/졸업/자퇴 등)">
+	            <input type="text" name="start_year" placeholder="시작한 해">
+	            <input type="text" name="end_year" placeholder="끝난 해">
+	            <input type="submit" value="next">
+            </form>
+          </div>
           <a href="#education"></a>
           <div class="label education">
             <span>education</span>
@@ -51,7 +60,16 @@
         </div>
         <div id="experience" class="card">
           <!-- <div class="grain"></div> -->
-          <div class="contents"></div>
+          <div class="contents experience">
+          	<form id="resume-experience-form" th:if="${session.user != null}" th:action="@{/resume/data/education}" method="post">
+	            <input type="text" name="name" placeholder="회사/프로젝트 이름">
+	            <input type="text" name="description" placeholder="상세설명">
+	            <input type="text" name="start_year" placeholder="시작한 해">
+	            <input type="text" name="end_year" placeholder="끝난 해">
+	            <input type="text" name="link" placeholder="참고링크">
+	            <input type="submit" value="next">
+            </form>
+          </div>
           <a href="#experience"></a>
           <div class="label experience">
             <span>experience</span>
@@ -59,7 +77,14 @@
         </div>
         <div id="skills" class="card">
           <!-- <div class="grain"></div> -->
-          <div class="contents"></div>
+          <div class="contents skills">
+          	<form id="resume-skills-form" th:if="${session.user != null}" th:action="@{/resume/data/skills}" method="post">
+	            <input type="checkbox" name="Java" value="Java">Java
+	            <input type="checkbox" name="Javascript" value="Javascript">Javascript
+	            <input type="checkbox" name="Python" value="Python">Python
+	            <input type="checkbox" name="Ruby" value="Ruby">Ruby
+            </form>
+          </div>
           <a href="#skills"></a>
           <div class="label skills">
             <span>skills</span>
@@ -91,12 +116,13 @@
     	<h1 id="name"></h1>
     	<h1 id="email"></h1>
     </div>
-    <script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
-	<script th:src="@{/lib/node_modules/director/build/director.js}"></script>
+    <script th:src="@{/lib/jquery.min.js}"></script>
+	<script th:src="@{/lib/director.min.js}"></script>
 	<script th:src="@{/lib/validator.min.js}"></script>
 	<script th:src="@{/scripts/ajax.js}"></script>
 	<script th:src="@{/scripts/readymade.inputValidator.js}"></script>
 	<script th:src="@{/scripts/readymade.inputSender.js}"></script>
+	<script th:src="@{/scripts/readymade.labelFilter.js}"></script>
 	<script th:src="@{/scripts/app.js}"></script>
 </body>
 </html>

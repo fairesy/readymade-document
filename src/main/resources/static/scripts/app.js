@@ -4,6 +4,7 @@ var routes = {
 				$(".login-modal").hide();
 				$(".join-modal").hide();
 				InputSender.init();
+				Filter.init();
 				
 				/*TODO htmltopdf api콜로 바꾸기*/
 				$(".print-button").on("click", function(){

@@ -218,8 +218,11 @@ nav .contact:hover:before{
 }
 
 /*테스트용 임시 z-index*/
-#personal, .card .label{
+/* #personal{
   z-index: 100;
+} */
+.card .label{
+	z-index:110;
 }
 
 #personal .contents{
@@ -228,11 +231,20 @@ nav .contact:hover:before{
 #education .contents{
   background-color: rgb(100, 100, 100);
 }
+#education .label{
+	top:85px;
+}
 #experience .contents{
   background-color: rgb(150, 150, 150);
 }
+#experience .label{
+	top:170px;
+}
 #skills .contents{
   background-color: rgb(200, 200, 200);
+}
+#skills .label{
+	top: 255px;
 }
 
 .selected-card{
@@ -247,6 +259,7 @@ nav .contact:hover:before{
   height: 390px;
   /*background-color: rgb(50, 50, 50);*/
 }
+
 .card .label{
   position: absolute;
   right: 0;
@@ -254,6 +267,7 @@ nav .contact:hover:before{
   height: 70px;
   border-radius: 0 5px 5px 0;
   transition: .2s ease-in;
+  cursor: pointer;
 }
 .card .label span{
   display: block;
@@ -301,15 +315,15 @@ input.invalid{
 }
 
 .card .education{
-  top: 85px;/*label height+여백*/
+  /* top: 85px;label height+여백 */
   background-color: rgb(100, 100, 100);
 }
 .card .experience{
-  top: 170px;
+  /* top: 170px; */
   background-color: rgb(150, 150, 150);
 }
 .card .skills{
-  top: 255px;
+  /* top: 255px; */
   background-color: rgb(200, 200, 200);
 }
 

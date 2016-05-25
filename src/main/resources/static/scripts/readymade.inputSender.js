@@ -11,6 +11,8 @@ var InputSender = (function(){
 		  .done(function(){
 		    console.log("개인정보 전송 완료!");
 		    $("#education").addClass("selected-card");
+		    $(".card-name .top").text("where did you");
+		    $(".card-name .bottom").text("learn?");
 		  });
 	  }
 
