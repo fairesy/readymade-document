@@ -28,8 +28,8 @@
         <div id="personal" class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents personal-info">
-          	<form id="resume-personal-form" th:action="@{/resume/data/personal}" method="post">
-	            <input type="text" name="name_ko" placeholder="이름을 알려주세요">
+          	<form id="resume-personal-form" th:if="${session.user != null}" th:action="@{/resume/data/personal}" method="post">
+	            <input type="text" name="name_ko" th:value="${session.user.name}" placeholder="이름을 알려주세요">
 	            <input type="text" name="name_en" placeholder="영어이름은요?">
 	            <input type="email" name="email" placeholder="메일 보낼 주소를 알려주세요">
 	            <input type="text" name="phone" placeholder="그리고 전화번호도요!">

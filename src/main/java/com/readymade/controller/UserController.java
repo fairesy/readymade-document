@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.readymade.dao.DocumentDao;
 import com.readymade.dao.UserDao;
+import com.readymade.model.Document;
 import com.readymade.model.User;
 
 @Controller
@@ -15,19 +17,21 @@ public class UserController {
 	@Autowired
 	UserDao userDao;
 	
+	@Autowired
+	DocumentDao documentDao;
+	
 	@RequestMapping(value = "/users/join", method = RequestMethod.POST)
 	public String post(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-		//브라우저에서 작성한 회원가입 폼의 내용을 받아서,
-		//Model에 담고,
 		User user = new User(name, email, password);
 		
-		//Model에 담은 데이터를 데이터베이스에 넘겨준다.
 		try {
-			userDao.insert(user);
+			User joined = userDao.insert(user);
+			//문서종류가 하나이기때문에, 일단은 가입 시점에 document를 생성해서 가지고 있는다. 이후에 document 생성을 분리 
+			documentDao.insert(new Document("resume_default", joined.getId()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//다 하고 나면 로그인 화면으로 가기! 
+		
 		return "redirect:/#/login";
 	}
 }
