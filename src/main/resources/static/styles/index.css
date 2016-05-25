@@ -104,7 +104,7 @@ nav .contact:hover:before{
 	height:200px;
 }
 #join-form{
-	height:260px;	
+	height:260px;
 }
 
 #login-form input, #join-form input{
@@ -252,9 +252,15 @@ nav .contact:hover:before{
     border-left: 0px;
     border-right: 0px;
     border-bottom: 4px solid #fff;
+    transition: .2s ease-out;
 }
 .personal-info input:focus{
   outline: none;
+}
+.personal-info input[type=submit]{
+  background-color: rgb(243,244,241);
+  color: rgb(50,50,50);
+  cursor: pointer;
 }
 
 .card .education{
@@ -284,6 +290,13 @@ nav .contact:hover:before{
 .print-button:hover{
   margin-left: 414px;
 }
+.print-button a{
+	position:absolute;
+	top:0;
+	display:block;
+	width:80px;
+	height:390px;
+}
 .print-button .label{
   width: 100%;
   height: 100%;
@@ -297,4 +310,8 @@ nav .contact:hover:before{
   z-index: 5;
   opacity: 0.05;
   background-image: url("../../images/noise.jpg");
+}
+
+#print-part{
+	display:none;
 }

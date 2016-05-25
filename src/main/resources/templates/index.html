@@ -24,10 +24,13 @@
         <div id="personal"class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents personal-info">
-<!--             <input type="text" placeholder="이름을 알려주세요">
-            <input type="text" placeholder="영어이름은요?">
-            <input type="text" placeholder="메일 보낼 주소를 알려주세요">
-            <input type="text" placeholder="그리고 전화번호도요!"> -->
+          	<form id="resume-personal-form" th:action="@{/resume/data/personal}" method="post">
+	            <input type="text" name="name_ko" placeholder="이름을 알려주세요">
+	            <input type="text" name="name_en" placeholder="영어이름은요?">
+	            <input type="email" name="email" placeholder="메일 보낼 주소를 알려주세요">
+	            <input type="text" name="phone" placeholder="그리고 전화번호도요!">
+	            <input type="submit" value="next">
+            </form>
           </div>
           <a href="#personal"></a>
           <div class="label personal">
@@ -80,9 +83,16 @@
 			<button class="btn-join" th:href="@{/users/join}">join</button>
 		</form>
     </div>
+    <div id="print-part">
+    	<h1 id="name"></h1>
+    	<h1 id="email"></h1>
+    </div>
     <script th:src="@{/lib/node_modules/jquery/dist/jquery.min.js}"></script>
 	<script th:src="@{/lib/node_modules/director/build/director.js}"></script>
-	<script th:src="@{/lib/node_modules/validator-js/src/validator.js}"></script>
+	<script th:src="@{/lib/validator.min.js}"></script>
+	<script th:src="@{/scripts/ajax.js}"></script>
+	<script th:src="@{/scripts/readymade.inputValidator.js}"></script>
+	<script th:src="@{/scripts/readymade.inputSender.js}"></script>
 	<script th:src="@{/scripts/app.js}"></script>
 </body>
 </html>

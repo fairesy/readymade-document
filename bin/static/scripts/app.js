@@ -1,9 +1,15 @@
-
 var routes = {
 		"/" : {
 			on : function(){
 				$(".login-modal").hide();
 				$(".join-modal").hide();
+				InputSender.init();
+				
+				/*TODO htmltopdf api콜로 바꾸기*/
+				$(".print-button").on("click", function(){
+					
+					window.print();
+				});
 			}
 		},
 		"/login" : {
@@ -17,6 +23,8 @@ var routes = {
 			on : function(){
 				$(".login-modal").hide();
 				$(".join-modal").show();
+				//validator로 체크
+				//validator통과해야 join 버튼 활성화
 			}
 		}
 }

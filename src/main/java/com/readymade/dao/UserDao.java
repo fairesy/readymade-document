@@ -21,7 +21,7 @@ public class UserDao {
 	public User insert(User user) throws Exception{
 		KeyHolder holder = new GeneratedKeyHolder();
 
-		String sql = "INSERT INTO user (email, password, name) VALUES (:email, :password, :name)";
+		String sql = "INSERT INTO user (email, password) VALUES (:email, :password)";
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(user);
 		jdbcTemplate.update(sql, namedParameters, holder);
 
@@ -30,9 +30,9 @@ public class UserDao {
 		return user;
 	}
 	
-	public User findById(Integer id) {
-		String sql = "SELECT * FROM user WHERE id = :id";
-	    SqlParameterSource namedParameters = new MapSqlParameterSource("id", id);
+	public User findByEmail(String email) {
+		String sql = "SELECT * FROM user WHERE email = :email";
+	    SqlParameterSource namedParameters = new MapSqlParameterSource("email", email);
 		return DataAccessUtils.singleResult(jdbcTemplate.query(sql, namedParameters, new BeanPropertyRowMapper<User>(User.class)));
 	}
 }
