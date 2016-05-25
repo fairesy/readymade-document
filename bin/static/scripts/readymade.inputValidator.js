@@ -16,37 +16,37 @@ var InputValidator = (function(){
 		var isPhone = false;
 		
 		if(validator.isNull($name_ko.val())){
-			$name_ko.css("border-color", "red");
+			$name_ko.addClass("invalid");
 		}else{
 			isNameKo = true;
 			
 			$("#print-part #name").text($name_ko.val());
 			
-			$name_ko.css("border-color", "#fff");
+			$name_ko.removeClass("invalid");
 		}
 		
 		if(validator.isNull($name_en.val())){
-			$name_en.css("border-color", "red");
+			$name_en.addClass("invalid");
 		}else{
 			isNameEn = true;
-			$name_en.css("border-color", "#fff");
+			$name_en.removeClass("invalid");
 		}
 		
 		if(validator.isNull($email.val())){
-			$email.css("border-color", "red");
+			$email.addClass("invalid");
 		}else{
 			isEmail = true;
 			
 			$("#print-part #email").text($email.val());
 			
-			$email.css("border-color", "#fff");
+			$email.removeClass("invalid");
 		}
 		
 		if(validator.isNull($phone.val())){
-			$phone.css("border-color", "red");
+			$phone.addClass("invalid");
 		}else{
 			isPhone = true;
-			$phone.css("border-color", "#fff");
+			$phone.removeClass("invalid");
 		}
 		
 		if(isNameKo && isNameEn && isEmail && isPhone){

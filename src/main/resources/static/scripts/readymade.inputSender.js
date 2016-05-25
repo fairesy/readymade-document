@@ -5,17 +5,17 @@ var InputSender = (function(){
 	  var personalInfo = $("#resume-personal-form").serialize();
 //	  var url = $("")
 	  console.log(personalInfo);
-	  
+
 	  if(InputValidator.personalValidated()){
 		  AJAX.post("/resume/data/personal", personalInfo)
 		  .done(function(){
 		    console.log("개인정보 전송 완료!");
-		    $("#resume-personal-form").hide();
-		  });  
+		    $("#education").addClass("selected-card");
+		  });
 	  }
-	  
+
   }
-  
+
   function init(){
 	  console.log("personal init");
 	  $("#resume-personal-form input[type=submit]").on("click", sendPersonalInfo);

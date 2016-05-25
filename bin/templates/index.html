@@ -11,17 +11,21 @@
 	<nav>
       <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
       <a class="title" href="#/introduction">ready-made document</a>
-      <a class="login" href="#/login">login</a>
+      <a class="login" href="#/login" th:if="${session.user == null}">login</a>
+      <a class="login" href="#" th:if="${session.user != null}" th:text="${session.user.name}"></a>
       <div class="copyright">&copy;sososimsim</div>
       <a class="contact" href="#/contact">contact</a>
     </nav>
+    <div id="login-needed-blocker" th:if="${session.user == null}">
+    	로그인 후 사용하실 수 있습니다!
+    </div>
     <div id="main">
       <div class="card-wrapper">
         <div class="card-name">
           <span class="top">who are</span>
           <span class="bottom">you</span>
         </div>
-        <div id="personal"class="card">
+        <div id="personal" class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents personal-info">
           	<form id="resume-personal-form" th:action="@{/resume/data/personal}" method="post">
@@ -37,7 +41,7 @@
             <span>personal</span>
           </div>
         </div>
-        <div class="card">
+        <div id="education" class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents"></div>
           <a href="#education"></a>
@@ -45,7 +49,7 @@
             <span>education</span>
           </div>
         </div>
-        <div class="card">
+        <div id="experience" class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents"></div>
           <a href="#experience"></a>
@@ -53,7 +57,7 @@
             <span>experience</span>
           </div>
         </div>
-        <div class="card">
+        <div id="skills" class="card">
           <!-- <div class="grain"></div> -->
           <div class="contents"></div>
           <a href="#skills"></a>
@@ -62,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="print-button">
+      <div class="print-button" th:if="${session.user != null}">
         <div class="grain"></div>
         <div class="label">print</div>
       </div>

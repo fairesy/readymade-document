@@ -21,7 +21,7 @@ public class UserDao {
 	public User insert(User user) throws Exception{
 		KeyHolder holder = new GeneratedKeyHolder();
 
-		String sql = "INSERT INTO user (email, password) VALUES (:email, :password)";
+		String sql = "INSERT INTO user (name, email, password) VALUES (:name, :email, :password)";
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(user);
 		jdbcTemplate.update(sql, namedParameters, holder);
 
