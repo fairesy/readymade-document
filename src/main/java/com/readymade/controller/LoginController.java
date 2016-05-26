@@ -1,15 +1,17 @@
 package com.readymade.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.readymade.dao.UserDao;
 import com.readymade.model.User;
@@ -21,12 +23,15 @@ public class LoginController {
 	UserDao userDao;
 	
 	@RequestMapping(value="/users/login", method = RequestMethod.POST)
-	public String login(@RequestParam String email, @RequestParam String password, HttpSession session){
+	public String login(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session){
+		if(result.hasErrors()){
+			logger.debug("error : {}", result);
+			return "redirect:/#/login";
+		}
+		User loginUser = userDao.findByEmail(user.getEmail());
 		
-		User user = userDao.findByEmail(email);
-	
-		if(user != null){
-			if(BCrypt.checkpw(password, user.getPassword())){//hashedPassword.equals(user.getPassword());
+		if(loginUser != null){
+			if(BCrypt.checkpw(user.getPassword(), loginUser.getPassword())){
 				logger.debug("로그인 성공");
 				session.setAttribute("user", user);
 				return "redirect:/";

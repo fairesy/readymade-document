@@ -1,9 +1,22 @@
 package com.readymade.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class User {
 	private Integer id;
+	
+	@NotBlank
+	@Size(min = 4, max = 12)
 	private String name;
+	
+	@NotBlank
+	@Email(message="this is invalid email")
 	private String email;
+	
+	@Size(min = 6, max = 12, message="should be something")
 	private String password;
 	
 	public User(String name, String email, String password) {

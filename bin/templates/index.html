@@ -97,7 +97,7 @@
       </div>
     </div>
     <div class="login-modal">
-    	<form id="login-form" method="post" th:action="@{/users/login}">
+    	<form id="login-form" method="post" th:object="${user}" th:action="@{/users/login}">
 			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
 			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
 			<button class="btn-login" type="submit" name="action">login</button>
@@ -105,7 +105,8 @@
 		</form>
     </div>
     <div class="join-modal">
-    	<form id="join-form" method="post" th:action="@{/users/join}">
+    	<span th:text="${error}"></span>
+    	<form id="join-form" method="post" th:object="${user}" th:action="@{/users/join}">
     		<input id="email" type="text" name="name" placeholder="이름을 입력해주세요">
 			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
 			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
