@@ -24,12 +24,13 @@ public class LoginController {
 	
 	@RequestMapping(value="/users/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session){
+		//input hidden으로 name을 받아옴 : getName 금지...!!
 		if(result.hasErrors()){
 			logger.debug("error : {}", result);
 			return "redirect:/#/login";
 		}
 		User loginUser = userDao.findByEmail(user.getEmail());
-		
+
 		if(loginUser != null){
 			if(BCrypt.checkpw(user.getPassword(), loginUser.getPassword())){
 				logger.debug("로그인 성공");

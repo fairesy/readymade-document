@@ -98,6 +98,7 @@
     </div>
     <div class="login-modal">
     	<form id="login-form" method="post" th:object="${user}" th:action="@{/users/login}">
+    		<input type="hidden" name="name" value="name">
 			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
 			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
 			<button class="btn-login" type="submit" name="action">login</button>
