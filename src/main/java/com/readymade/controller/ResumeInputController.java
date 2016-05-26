@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readymade.dao.DocumentDao;
 import com.readymade.dao.ModuleDao;
 import com.readymade.model.Module;
-import com.readymade.model.User;
 
 @Controller
 @RequestMapping("/resume/data")
 public class ResumeInputController {
+	
+	private Logger logger = LoggerFactory.getLogger(ResumeInputController.class);
 	
 	@Autowired
 	ModuleDao moduleDao;
@@ -36,7 +39,6 @@ public class ResumeInputController {
 		personal.put("email", email);
 		personal.put("name_en", name_en);
 		personal.put("name_ko", name_ko);
-//		JSONObject personal = new JSONObject();
 
 		String moduleType = "resume_personal";
 		String data;
@@ -44,7 +46,7 @@ public class ResumeInputController {
 		Integer document_id = 1;//test data
 		try {
 			data = mapper.writeValueAsString(personal);
-			System.out.println("[personal information] : " + data);
+			logger.debug("personal information : {}", data);
 			Module personalModule = new Module(moduleType, data, document_id);
 //			moduleDao.insert(personalModule);//TODO 처음엔 insert, 그 다음부턴 update
 		} catch (Exception e) {
