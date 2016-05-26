@@ -12,7 +12,7 @@
       <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
       <a class="title" href="#/introduction">ready-made document</a>
       <a class="login" href="#/login" th:if="${session.user == null}">login</a>
-      <a class="login" href="#" th:if="${session.user != null}" th:text="${session.user.name}"></a>
+      <a class="login" href="/users/logout" th:if="${session.user != null}" th:text="${session.user.name}"></a>
       <div class="copyright">&copy;sososimsim</div>
       <a class="contact" href="#/contact">contact</a>
     </nav>

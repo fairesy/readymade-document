@@ -37,4 +37,10 @@ public class LoginController {
 		}
 		//TODO "패스워드가 일치하지 않습니다", "가입된 유저가 아닙니다" 등 메시지 출력
 	}
+	
+	@RequestMapping(value="/users/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "redirect:/";
+	}
 }
