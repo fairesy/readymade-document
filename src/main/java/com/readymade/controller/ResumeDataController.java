@@ -31,7 +31,7 @@ public class ResumeDataController {
 	DocumentDao documentDao;
 	
 	@RequestMapping(value = "/personal", method = RequestMethod.POST)
-	public String savePersonalInfo(@RequestParam String name_ko, @RequestParam String name_en, 
+	public void savePersonalInfo(@RequestParam String name_ko, @RequestParam String name_en, 
 			@RequestParam String email, @RequestParam String phone, HttpSession session) throws JsonProcessingException{
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String, String> personal = new HashMap<String, String>();
@@ -41,9 +41,8 @@ public class ResumeDataController {
 		personal.put("name_ko", name_ko);
 
 		String moduleType = "resume_personal";
+		Integer document_id = 1;//resumeId
 		String data;
-//		Integer document_id = documentDao.findByUserId(1).getId();//documentDao에서 documentId 얻어오는 방식(시점?) 고민 
-		Integer document_id = 1;//test data
 		try {
 			data = mapper.writeValueAsString(personal);
 			logger.debug("personal information : {}", data);
@@ -53,22 +52,17 @@ public class ResumeDataController {
 			e.printStackTrace();
 		}
 	
-		return "redirect:/";
-		
 	}
 	
 	@RequestMapping(value = "/education", method = RequestMethod.POST)
-	public String saveEducationInfo(){
-		return null;
+	public void saveEducationInfo(){
 	}
 	
 	@RequestMapping(value = "/experience", method = RequestMethod.POST)
-	public String saveExperiences(){
-		return null;
+	public void saveExperiences(){
 	}
 	
 	@RequestMapping(value = "/skills", method = RequestMethod.POST)
-	public String saveSkillset(){
-		return null;
+	public void saveSkillset(){
 	}
 }

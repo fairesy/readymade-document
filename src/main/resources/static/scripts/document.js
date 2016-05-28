@@ -2,6 +2,10 @@ var routes = {
 		"/documents/:documentId/new" : function(documentId){
 			InputSender.init();
 			Filter.init();
+		},
+		"/documents/:documentId/edit" : function(documentId){
+			InputSender.init();
+			Filter.init();
 		}
 }
 
