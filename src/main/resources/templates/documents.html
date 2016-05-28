@@ -9,16 +9,15 @@
 </head>
 <body>
 	<nav>
-      <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
       <a class="title" href="#/introduction">ready-made document</a>
       <a class="login" href="#/login" th:if="${session.user == null}">login</a>
-      <a class="login" href="/users/logout" th:if="${session.user != null}" th:text="${session.user.name}"></a>
+      <a class="login" href="/users/logout" th:if="${session.user != null}" th:text="logout"></a>
       <div class="copyright">&copy;sososimsim</div>
       <a class="contact" href="#/contact">contact</a>
     </nav>
     <div id="main">
   	  <div class="document">
-	  	  <a href="/documents/1/new">
+	  	  <a href="/documents/1">
 	  	  	<svg id="line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70.68 114.33">
 			    <title>resume</title>
 			    <line x1="7.11" y1="5.95" x2="9.63" y2="5.95" style="fill:none;stroke:#231815;stroke-miterlimit:10;stroke-width:0.5px"/>
@@ -76,35 +75,14 @@
   	  	</a>
   	  </div>
     </div>
-    <div class="login-modal">
-    	<form id="login-form" method="post" th:object="${user}" th:action="@{/users/login}">
-    		<input type="hidden" name="name" value="name">
-			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
-			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
-			<button class="btn-login" type="submit" name="action">login</button>
-			<a class="btn-join" th:href="@{#/users/form}">join</a>
-		</form>
-    </div>
-    <div class="join-modal">
-    	<span th:text="${error}"></span>
-    	<form id="join-form" method="post" th:object="${user}" th:action="@{/users/join}">
-    		<input id="email" type="text" name="name" placeholder="이름을 입력해주세요">
-			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
-			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
-			<button class="btn-join" th:href="@{/users/join}">join</button>
-		</form>
-    </div>
-    <div id="print-part">
-    	<h1 id="name"></h1>
-    	<h1 id="email"></h1>
-    </div>
     <script th:src="@{/lib/jquery.min.js}"></script>
-<!-- 	<script th:src="@{/lib/director.min.js}"></script>
+ 	<script th:src="@{/lib/director.min.js}"></script>
 	<script th:src="@{/lib/validator.min.js}"></script>
 	<script th:src="@{/scripts/ajax.js}"></script>
 	<script th:src="@{/scripts/readymade.inputValidator.js}"></script>
 	<script th:src="@{/scripts/readymade.inputSender.js}"></script>
 	<script th:src="@{/scripts/readymade.labelFilter.js}"></script>
-	<script th:src="@{/scripts/app.js}"></script> -->
+	<script th:src="@{/scripts/document.js}"></script>
+	<!-- <script th:src="@{/scripts/app.js}"></script>  -->
 </body>
 </html>

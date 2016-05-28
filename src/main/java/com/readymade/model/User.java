@@ -7,11 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class User {
 	private Integer id;
-	
-	@NotBlank
-	@Size(min = 4, max = 12)
-	private String name;
-	
+
 	@NotBlank
 	@Email(message="this is invalid email")
 	private String email;
@@ -19,8 +15,7 @@ public class User {
 	@Size(min = 6, max = 12, message="should be something")
 	private String password;
 	
-	public User(String name, String email, String password) {
-		this.name = name;
+	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
@@ -33,14 +28,7 @@ public class User {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	public String getEmail() {
 		return email;
 	}

@@ -13,7 +13,7 @@
       <!--id를 쓰는게 안좋다고들 하는데,, 그럼 여기에서 div각각을 어떻게 찾아오는게 좋을까?-->
       <a class="title" href="#/introduction">ready-made document</a>
       <a class="login" href="#/login" th:if="${session.user == null}">login</a>
-      <a class="login" href="/users/logout" th:if="${session.user != null}" th:text="${session.user.name}"></a>
+      <a class="login" href="/users/logout" th:if="${session.user != null}" th:text="logout"></a>
       <div class="copyright">&copy;sososimsim</div>
       <a class="contact" href="#/contact">contact</a>
     </nav>
@@ -28,7 +28,7 @@
           <!-- <div class="grain"></div> -->
           <div class="contents personal-info">
           	<form id="resume-personal-form" th:if="${session.user != null}" th:action="@{/resume/data/personal}" method="post">
-	            <input type="text" name="name_ko" th:value="${session.user.name}" placeholder="이름을 알려주세요">
+	            <input type="text" name="name_ko" placeholder="이름을 알려주세요">
 	            <input type="text" name="name_en" placeholder="영어이름은요?">
 	            <input type="email" name="email" th:value="${session.user.email}" placeholder="메일 보낼 주소를 알려주세요">
 	            <input type="text" name="phone" placeholder="그리고 전화번호도요!">
@@ -95,24 +95,7 @@
         <div class="label">print</div>
       </div>
     </div>
-    <div class="login-modal">
-    	<form id="login-form" method="post" th:object="${user}" th:action="@{/users/login}">
-    		<input type="hidden" name="name" value="name">
-			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
-			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
-			<button class="btn-login" type="submit" name="action">login</button>
-			<a class="btn-join" th:href="@{#/users/form}">join</a>
-		</form>
-    </div>
-    <div class="join-modal">
-    	<span th:text="${error}"></span>
-    	<form id="join-form" method="post" th:object="${user}" th:action="@{/users/join}">
-    		<input id="email" type="text" name="name" placeholder="이름을 입력해주세요">
-			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요">
-			<input id="password" type="password" name="password" placeholder="패스워드를 입력해주세요">
-			<button class="btn-join" th:href="@{/users/join}">join</button>
-		</form>
-    </div>
+
     <div id="print-part">
     	<h1 id="name"></h1>
     	<h1 id="email"></h1>
@@ -124,6 +107,6 @@
 	<script th:src="@{/scripts/readymade.inputValidator.js}"></script>
 	<script th:src="@{/scripts/readymade.inputSender.js}"></script>
 	<script th:src="@{/scripts/readymade.labelFilter.js}"></script>
-	<script th:src="@{/scripts/app.js}"></script>
+	<script th:src="@{/scripts/document.js}"></script>
 </body>
 </html>

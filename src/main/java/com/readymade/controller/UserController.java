@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.readymade.dao.DocumentDao;
 import com.readymade.dao.UserDao;
-import com.readymade.model.Document;
 import com.readymade.model.User;
 
 
@@ -41,16 +40,14 @@ public class UserController {
 		logger.debug("user : {}", user);
 		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		logger.debug("hashed : {}", hashedPassword);
-		User newUser = new User(user.getName(), user.getEmail(), hashedPassword);
+		User newUser = new User(user.getEmail(), hashedPassword);
 
 		try {
-			User joined = userDao.insert(newUser);
-			//문서종류가 하나이기때문에, 일단은 가입 시점에 document를 생성해서 가지고 있는다. 이후에 document 생성을 분리 
-			documentDao.insert(new Document("resume_default", joined.getId()));
+			userDao.insert(newUser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/#/login";
+		return "redirect:/#/users/login";
 	}
 }

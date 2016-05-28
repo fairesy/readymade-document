@@ -100,11 +100,8 @@ nav .contact:hover:before{
 	left: 0;
 	width:360px;
 }
-#login-form{
+#login-form, #join-form{
 	height:200px;
-}
-#join-form{
-	height:260px;
 }
 
 #login-form input, #join-form input{
