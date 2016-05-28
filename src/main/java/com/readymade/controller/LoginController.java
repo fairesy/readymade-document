@@ -35,7 +35,7 @@ public class LoginController {
 			if(BCrypt.checkpw(user.getPassword(), loginUser.getPassword())){
 				logger.debug("로그인 성공");
 				session.setAttribute("user", user);
-				return "redirect:/";
+				return "redirect:/documents"; 
 			}else{
 				logger.debug("패스워드 불일치");
 				return "redirect:/#/login";

@@ -21,9 +21,9 @@ import com.readymade.model.Module;
 
 @Controller
 @RequestMapping("/resume/data")
-public class ResumeInputController {
+public class ResumeDataController {
 	
-	private Logger logger = LoggerFactory.getLogger(ResumeInputController.class);
+	private Logger logger = LoggerFactory.getLogger(ResumeDataController.class);
 	
 	@Autowired
 	ModuleDao moduleDao;
@@ -55,5 +55,20 @@ public class ResumeInputController {
 	
 		return "redirect:/";
 		
+	}
+	
+	@RequestMapping(value = "/education", method = RequestMethod.POST)
+	public String saveEducationInfo(){
+		return null;
+	}
+	
+	@RequestMapping(value = "/experience", method = RequestMethod.POST)
+	public String saveExperiences(){
+		return null;
+	}
+	
+	@RequestMapping(value = "/skills", method = RequestMethod.POST)
+	public String saveSkillset(){
+		return null;
 	}
 }
