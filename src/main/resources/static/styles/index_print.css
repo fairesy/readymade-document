@@ -39,7 +39,8 @@ nav, main, .label, input, .card, .card-name{
 	text-align:center;
 }
 #personal-part .name_en{
-	font-family: "ansonregular";
+	font-family: 'ansonregular';
+	letter-spacing:-4pt;
 	font-size: 48pt;
 	color: rgb(71,168,230);
 }
@@ -109,6 +110,7 @@ nav, main, .label, input, .card, .card-name{
 }
 .section-title .name{
 	text-align:center;
+	color:rgb(71,168,230);
 }
 
 .clearfix {
