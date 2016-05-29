@@ -226,11 +226,21 @@
           <!-- <div class="grain"></div> -->
           <div class="contents skills">
           	<form id="resume-skills-form" th:if="${session.user != null}" th:action="@{/resume/data/skills}" method="post">
-	            <input type="checkbox" name="C" value="C"><label>C</label>
+	            
+	            <input type="checkbox" name="Android" value="Android"><label>Android</label>
+	            <input type="checkbox" name="iOS" value="iOS"><label>iOS</label>
+	            <input type="checkbox" name="C++" value="C++"><label>C++</label>
 	            <input type="checkbox" name="Java" value="Java"><label>Java</label>
+	            <input type="checkbox" name="Spring" value="Spring"><label>Spring</label>
+	            <input type="checkbox" name="PHP" value="PHP"><label>PHP</label>
 	            <input type="checkbox" name="Javascript" value="Javascript"><label>Javascript</label>
+	            <input type="checkbox" name="NodeJS" value="NodeJS"><label>NodeJS</label>
+	            <input type="checkbox" name="AngularJS" value="AngularJS"><label>AngularJS</label>
 	            <input type="checkbox" name="Python" value="Python"><label>Python</label>
 	            <input type="checkbox" name="Ruby" value="Ruby"><label>Ruby</label>
+	            <input type="checkbox" name="MySQL" value="MySQL"><label>MySQL</label>
+	            <input type="checkbox" name="MongoDB" value="MongoDB"><label>MongoDB</label>
+	            <input type="checkbox" name="AWS" value="AWS"><label>AWS</label>
             </form>
           </div>
           <a href="#skills"></a>
@@ -246,8 +256,61 @@
     </div>
 
     <div id="print-part">
-    	<h1 id="name"></h1>
-    	<h1 id="email"></h1>
+    	<div class="outline left"></div>
+    	<div class="outline top"></div>
+    	<div class="outline right"></div>
+    	<div class="outline bottom"></div>
+    	<section id="personal-part">
+    		<div class="name_en"></div><!-- SHINYOUNG PARK -->
+    		<div class="speciality"></div><!-- frontend developer -->
+    		<div class="name_ko"></div><!-- 박신영 -->
+    		<div class="email"></div>
+    		<div class="phone"></div>
+    	</section>
+    	<section id="education-part">
+    		<div class="section-title">
+    			<div class="line"></div>
+    			<div class="name">EDUCATION</div>
+    		</div>
+    		<div class="education clearfix">
+    			<div class="period"></div>
+    			<div class="name"></div>
+    		</div>
+    		<div class="education clearfix">
+    			<div class="period"></div><!-- 2014-2016 -->
+    			<div class="name"></div><!-- NHN NEXT WEB UI [재학] -->
+    		</div>
+    	</section>
+    	<section id="experience-part">
+    		<div class="section-title">
+    			<div class="line"></div>
+    			<div class="name">EXPERIENCE</div>
+    		</div>
+    		<div class="experience clearfix">
+    			<div class="period"></div><!-- 2013.03 - 2014.03 -->
+    			<div class="name"></div><!-- one moment -->
+    			<div class="description"></div> <!-- 사진에서 추출한 색으로 메시지를 쓰고 블라블라 -->
+    			<div class="link"></div><!-- www.github.com/fairesy/one-moment -->
+    		</div>
+    		<div class="experience clearfix">
+    			<div class="period"></div>
+    			<div class="name"></div>
+    			<div class="description"></div>
+    			<div class="link"></div>
+    		</div>
+    		<div class="experience clearfix">
+    			<div class="period"></div>
+    			<div class="name"></div>
+    			<div class="description"></div>
+    			<div class="link"></div>
+    		</div>
+    	</section>
+    	<section id="skills-part">
+    		<div class="section-title">
+    			<div class="line"></div>
+    			<div class="name">PROFESSIONAL SKILLS</div>
+    		</div>
+    	</section>
     </div>
     <script th:src="@{/lib/jquery.min.js}"></script>
 	<script th:src="@{/lib/director.min.js}"></script>
