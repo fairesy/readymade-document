@@ -54,4 +54,18 @@ public class DocumentDao {
 //	    return DataAccessUtils.singleResult(jdbcTemplate.query(sql, namedParameters, new BeanPropertyRowMapper<Document>(Document.class)));
 	}
 
+	public Document findResumeByUserId(Integer user_id) {
+		String sql = "SELECT * FROM document WHERE user_id = :user_id AND type = 'resume_default'";
+		SqlParameterSource namedParameters = new MapSqlParameterSource("user_id", Integer.valueOf(user_id));
+		
+		RowMapper<Document> rm = new RowMapper<Document>() {
+			@Override
+			public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Document(rs.getString("type"), rs.getInt("user_id"));
+			}
+		};
+		
+		return DataAccessUtils.singleResult(jdbcTemplate.query(sql, namedParameters, rm));
+	}
+
 }

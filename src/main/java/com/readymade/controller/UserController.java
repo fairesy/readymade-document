@@ -44,6 +44,7 @@ public class UserController {
 
 		try {
 			userDao.insert(newUser);
+			logger.debug("새로운 유저 가입이 완료되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

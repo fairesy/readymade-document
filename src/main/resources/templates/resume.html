@@ -226,10 +226,11 @@
           <!-- <div class="grain"></div> -->
           <div class="contents skills">
           	<form id="resume-skills-form" th:if="${session.user != null}" th:action="@{/resume/data/skills}" method="post">
-	            <input type="checkbox" name="Java" value="Java">Java
-	            <input type="checkbox" name="Javascript" value="Javascript">Javascript
-	            <input type="checkbox" name="Python" value="Python">Python
-	            <input type="checkbox" name="Ruby" value="Ruby">Ruby
+	            <input type="checkbox" name="C" value="C"><label>C</label>
+	            <input type="checkbox" name="Java" value="Java"><label>Java</label>
+	            <input type="checkbox" name="Javascript" value="Javascript"><label>Javascript</label>
+	            <input type="checkbox" name="Python" value="Python"><label>Python</label>
+	            <input type="checkbox" name="Ruby" value="Ruby"><label>Ruby</label>
             </form>
           </div>
           <a href="#skills"></a>

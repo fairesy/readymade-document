@@ -17,7 +17,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readymade.dao.DocumentDao;
 import com.readymade.dao.ModuleDao;
+import com.readymade.dao.UserDao;
+import com.readymade.model.Document;
 import com.readymade.model.Module;
+import com.readymade.model.User;
 
 @Controller
 @RequestMapping("/resume/data")
@@ -26,6 +29,8 @@ public class ResumeDataController {
 	private Logger logger = LoggerFactory.getLogger(ResumeDataController.class);
 	
 	@Autowired
+	UserDao userDao;
+	@Autowired
 	ModuleDao moduleDao;
 	@Autowired
 	DocumentDao documentDao;
@@ -33,25 +38,14 @@ public class ResumeDataController {
 	@RequestMapping(value = "/personal", method = RequestMethod.POST)
 	public void savePersonalInfo(@RequestParam String name_ko, @RequestParam String name_en, 
 			@RequestParam String email, @RequestParam String phone, HttpSession session) throws JsonProcessingException{
-		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String, String> personal = new HashMap<String, String>();
-		personal.put("phone", phone);
-		personal.put("email", email);
-		personal.put("name_en", name_en);
-		personal.put("name_ko", name_ko);
+		int resumeId = getResumeId((User) session.getAttribute("user"));
+		
+	}
 
-		String moduleType = "resume_personal";
-		Integer document_id = 1;//resumeId
-		String data;
-		try {
-			data = mapper.writeValueAsString(personal);
-			logger.debug("personal information : {}", data);
-			Module personalModule = new Module(moduleType, data, document_id);
-//			moduleDao.insert(personalModule);//TODO 처음엔 insert, 그 다음부턴 update
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
+	private Integer getResumeId(User sessionUser) {
+		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
+		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
+		return resume.getId();
 	}
 	
 	@RequestMapping(value = "/education", method = RequestMethod.POST)

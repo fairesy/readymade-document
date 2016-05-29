@@ -150,6 +150,7 @@
   background-color: rgb(243,244,241);
   color: rgb(50,50,50);
   cursor: pointer;
+  font-size:9pt;
 }
 
 input.invalid{
