@@ -54,6 +54,7 @@ public class ThymeleafConfig implements ApplicationContextAware {
 		resolver.setApplicationContext(applicationContext);
 		resolver.setPrefix(this.properties.getPrefix());
 		resolver.setSuffix(this.properties.getSuffix());
+		resolver.setCharacterEncoding("UTF-8");
 		resolver.setTemplateMode(this.properties.getMode());
 		resolver.setCacheable(this.properties.isCache());
 		return resolver;
