@@ -9,10 +9,10 @@ public class User {
 	private Integer id;
 
 	@NotBlank
-	@Email(message="this is invalid email")
+	@Email(message="올바른 이메일이 아닙니다!")
 	private String email;
 	
-	@Size(min = 6, max = 12, message="should be something")
+	@Size(min = 6, max = 12, message="비밀번호가 잘못되었습니다! 6~12자로 입력해주세요.")
 	private String password;
 	
 	public User(String email, String password) {

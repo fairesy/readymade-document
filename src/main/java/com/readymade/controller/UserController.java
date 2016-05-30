@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.readymade.dao.DocumentDao;
 import com.readymade.dao.UserDao;
@@ -30,11 +32,15 @@ public class UserController {
 	DocumentDao documentDao;
 	
 	@RequestMapping(value = "/users/join", method = RequestMethod.POST)
-	public String post(@ModelAttribute("user") @Valid User user, BindingResult result) {
+	public ModelAndView post(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes redir) {
+		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()){
-			logger.debug("error : {}", result);
-			return "redirect:/#/users/form";
+			result.getFieldError().getDefaultMessage();
+			logger.debug("error : {}", result.getFieldError().getDefaultMessage());
+			mav.setViewName("redirect:/#/users/form");
+			redir.addFlashAttribute("errorMessage", result.getFieldError().getDefaultMessage());
+			return mav;
 		}
 		
 		logger.debug("user : {}", user);
@@ -48,7 +54,8 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		mav.setViewName("redirect:/#/users/login");
 		
-		return "redirect:/#/users/login";
+		return mav;
 	}
 }
