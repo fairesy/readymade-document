@@ -45,7 +45,6 @@ public class DocumentDao {
 				return new Document(rs.getString("type"), rs.getInt("user_id"));
 			}
         };
-	    
         
         return DataAccessUtils.singleResult(jdbcTemplate.query(sql, namedParameters, rm));
 	}
@@ -57,7 +56,7 @@ public class DocumentDao {
 		RowMapper<Document> rm = new RowMapper<Document>() {
 			@Override
 			public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new Document(rs.getString("type"), rs.getInt("user_id"));
+				return new Document(rs.getInt("id"), rs.getString("type"), rs.getInt("user_id"));
 			}
 		};
 		

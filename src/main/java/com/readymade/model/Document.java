@@ -9,6 +9,11 @@ public class Document {
 		this.type = type;
 		this.user_id = user_id;
 	}
+	public Document(int id, String type, int user_id) {
+		this.id = id;
+		this.type = type;
+		this.user_id = user_id;
+	}
 	public Integer getId() {
 		return id;
 	}

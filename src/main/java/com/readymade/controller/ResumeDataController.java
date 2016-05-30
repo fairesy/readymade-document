@@ -37,19 +37,12 @@ public class ResumeDataController {
 	DocumentDao documentDao;
 	
 	@RequestMapping(value = "/personal", method = RequestMethod.POST)
-	public @ResponseBody void savePersonalInfo(@RequestParam String name_ko, @RequestParam String name_en, 
+	public @ResponseBody void savePersonalData(@RequestParam String name_ko, @RequestParam String name_en, 
 			@RequestParam String email, @RequestParam String phone, HttpSession session){
-		logger.debug("퍼스널 데이터 인풋 받아오기!");
+		logger.debug("personal 데이터 입력");
 
-		User sessionUser = (User) session.getAttribute("user");
-		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
-		logger.debug("session user : {}", sessionUser);
-		logger.debug("session user mail : {}", sessionUser.getEmail());
-		logger.debug("logined user : {}", loginedUser);
-		logger.debug("logined user id : {}", loginedUser.getId());
-		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
-		/*resume.getId는 왜 null이죠.....?!?!?!?!?!?!?!?!?!?!?!?!?*/
-		Module personalModule = moduleDao.findResumePersonalByDocumentId(2);//2라니......resume id를 가지ㅗㄱ 오라고...
+		Integer resumeId = getResumeId(session.getAttribute("user"));
+		Module personalModule = moduleDao.findByDocumentId(resumeId, "resume_personal");
 		
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String, String> personal = new HashMap<String, String>();
@@ -61,22 +54,73 @@ public class ResumeDataController {
 			String data = mapper.writeValueAsString(personal);
 			personalModule.setData(data);
 			logger.debug("personal data : {}", data);
-			moduleDao.updatePersonal(personalModule);//document_id
+			moduleDao.update(personalModule);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 	}
 
+
 	@RequestMapping(value = "/education", method = RequestMethod.POST)
-	public @ResponseBody void saveEducationInfo(){
-		logger.debug("에쥬케이션 데이터 인풋 받아오기!");
+	public @ResponseBody void saveEducationData(@RequestParam String name, 
+			@RequestParam String major, @RequestParam String state,
+			@RequestParam String start_year, @RequestParam String end_year, HttpSession session){
+		logger.debug("education 데이터 입력");
+		Integer resumeId = getResumeId(session.getAttribute("user"));
+		Module educationModule = moduleDao.findByDocumentId(resumeId, "resume_education");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, String> education = new HashMap<String, String>();
+		education.put("name", name);
+		education.put("major", major);
+		education.put("state", state);
+		education.put("start_year", start_year);
+		education.put("end_year", end_year);
+		try {
+			String data = mapper.writeValueAsString(education);
+			educationModule.setData(data);
+			logger.debug("education data : {}", data);
+			moduleDao.update(educationModule);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/experience", method = RequestMethod.POST)
-	public void saveExperiences(){
+	public @ResponseBody void saveExperiences(@RequestParam String name, @RequestParam String description,
+			@RequestParam String start_year, @RequestParam String start_month,
+			@RequestParam String end_year, @RequestParam String end_month,
+			@RequestParam String link, HttpSession session){
+		logger.debug("experience 데이터 입력");
+		Integer resumeId = getResumeId(session.getAttribute("user"));
+		Module experienceModule = moduleDao.findByDocumentId(resumeId, "resume_experience");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, String> experience = new HashMap<String, String>();
+		experience.put("name", name);
+		experience.put("description", description);
+		experience.put("start", start_year + "." + start_month);
+		experience.put("end", end_year + "." + end_month);
+		experience.put("link", link);
+		try {
+			String data = mapper.writeValueAsString(experience);
+			experienceModule.setData(data);
+			logger.debug("education data : {}", data);
+			moduleDao.update(experienceModule);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/skills", method = RequestMethod.POST)
-	public void saveSkillset(){
+	public @ResponseBody void saveSkillset(@RequestParam String skills){
+		logger.debug(skills);
+	}
+	
+	private Integer getResumeId(Object user) {
+		User sessionUser = (User) user;
+		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
+		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
+		return resume.getId();
 	}
 }

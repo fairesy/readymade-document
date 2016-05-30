@@ -33,8 +33,8 @@ public class ModuleDao {
 		return module;
 	}
 
-	public Module findResumePersonalByDocumentId(Integer document_id) {
-		String sql = "SELECT * FROM module WHERE type = 'resume_personal' AND document_id = :document_id";
+	public Module findByDocumentId(Integer document_id, String type) {
+		String sql = "SELECT * FROM module WHERE type = '"+type+"' AND document_id = :document_id";
 		SqlParameterSource namedParameters = new MapSqlParameterSource("document_id", Integer.valueOf(document_id));
 				
 		RowMapper<Module> rm = new RowMapper<Module>() {
@@ -48,10 +48,11 @@ public class ModuleDao {
 				
 	}
 
-	public void updatePersonal(Module module) {
-		String sql = "UPDATE module SET data = :data WHERE document_id = :document_id AND type = 'resume_personal'";
+	public void update(Module module) {
+		String sql = "UPDATE module SET data = :data WHERE document_id = :document_id AND type = :type";
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(module);
 		jdbcTemplate.update(sql, namedParameters);
 	}
+
 	
 }

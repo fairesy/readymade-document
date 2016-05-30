@@ -34,10 +34,44 @@ var InputSender = (function(){
 	  }
   }
   
+  function sendExperienceData(e){
+	  e.preventDefault();
+	  console.log("sending experience data");
+	  var experience = $("#resume-experience-form").serialize();
+	  if(true){//InputValidator.experienceValidated()
+		  AJAX.post("/resume/data/experience", experience)
+		  .done(function(){
+		    console.log("experience 전송 완료!");
+		    $("#skills").addClass("selected-card");
+		    $(".card-name .top").text("and your");
+		    $(".card-name .bottom").text("skill set");
+		  });
+	  }
+  }
+  
+  function sendSkillsData(e){
+	  e.preventDefault();
+	  var skillList = "";
+	  
+	  $("#resume-skills-form input:checked").each(function(index){
+		  var skillName = $(this).val() + "-";
+		  console.log(skillName);
+		  skillList += skillName;
+	  });
+	  console.log(skillList);
+	  if(true){//InputValidator.skillsValidated()
+		  AJAX.post("/resume/data/skills", skillList)
+		  .done(function(){
+			  console.log("skills 전송 완료!");
+		  });
+	  }
+  }
+  
   function init(){
-	  console.log("personal init");
 	  $("#resume-personal-form input[type=submit]").on("click", sendPersonalData);
 	  $("#resume-education-form input[type=submit]").on("click", sendEducationData);
+	  $("#resume-experience-form input[type=submit]").on("click", sendExperienceData);
+	  $("#resume-skills-form input[type=submit]").on("click", sendSkillsData);
   }
   return {
 	  init : init
