@@ -112,6 +112,11 @@ nav, main, .label, input, .card, .card-name{
 	text-align:center;
 	color:rgb(71,168,230);
 }
+.section-title .name span{
+	padding-right:0.4cm;
+	padding-left:0.4cm;
+	background-color:#fff;
+}
 
 .clearfix {
   overflow: auto;

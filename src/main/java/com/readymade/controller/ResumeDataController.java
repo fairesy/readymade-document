@@ -106,7 +106,7 @@ public class ResumeDataController {
 		try {
 			String data = mapper.writeValueAsString(experience);
 			experienceModule.setData(data);
-			logger.debug("education data : {}", data);
+			logger.debug("experience data : {}", data);
 			moduleDao.update(experienceModule);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
