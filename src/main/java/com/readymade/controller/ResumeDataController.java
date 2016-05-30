@@ -41,8 +41,8 @@ public class ResumeDataController {
 			@RequestParam String email, @RequestParam String phone, HttpSession session){
 		logger.debug("personal 데이터 입력");
 
-		Integer resumeId = getResumeId(session.getAttribute("user"));
-		Module personalModule = moduleDao.findByDocumentId(resumeId, "resume_personal");
+		Integer resumeId = getResumeId(session);
+		Module personalModule = moduleDao.findByDocumentId(resumeId, "resume_personal"); //null
 		
 		ObjectMapper mapper = new ObjectMapper();
 		HashMap<String, String> personal = new HashMap<String, String>();
@@ -52,8 +52,9 @@ public class ResumeDataController {
 		personal.put("name_ko", name_ko);
 		try {
 			String data = mapper.writeValueAsString(personal);
-			personalModule.setData(data);
 			logger.debug("personal data : {}", data);
+			logger.debug("personal module : {}", personalModule);
+			personalModule.setData(data); //null pointer exception 
 			moduleDao.update(personalModule);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -66,7 +67,7 @@ public class ResumeDataController {
 			@RequestParam String major, @RequestParam String state,
 			@RequestParam String start_year, @RequestParam String end_year, HttpSession session){
 		logger.debug("education 데이터 입력");
-		Integer resumeId = getResumeId(session.getAttribute("user"));
+		Integer resumeId = getResumeId(session);
 		Module educationModule = moduleDao.findByDocumentId(resumeId, "resume_education");
 		
 		ObjectMapper mapper = new ObjectMapper();
@@ -92,7 +93,7 @@ public class ResumeDataController {
 			@RequestParam String end_year, @RequestParam String end_month,
 			@RequestParam String link, HttpSession session){
 		logger.debug("experience 데이터 입력");
-		Integer resumeId = getResumeId(session.getAttribute("user"));
+		Integer resumeId = getResumeId(session);
 		Module experienceModule = moduleDao.findByDocumentId(resumeId, "resume_experience");
 		
 		ObjectMapper mapper = new ObjectMapper();
@@ -117,10 +118,13 @@ public class ResumeDataController {
 		logger.debug(skills);
 	}
 	
-	private Integer getResumeId(Object user) {
-		User sessionUser = (User) user;
+	private Integer getResumeId(HttpSession session) {
+		User sessionUser = (User) session.getAttribute("user");
 		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
 		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
+		logger.debug("sessionUser : {}", sessionUser.getEmail());
+		logger.debug("loginedUserId : {}", loginedUser.getId());
+		logger.debug("resume : {}", resume.getId());
 		return resume.getId();
 	}
 }
