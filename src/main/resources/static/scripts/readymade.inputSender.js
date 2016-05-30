@@ -8,7 +8,7 @@ var InputSender = (function(){
 	  if(InputValidator.personalValidated()){
 		  AJAX.post("/resume/data/personal", personalInfo)
 		  .done(function(){
-		    console.log("개인정보 전송 완료!");
+		    console.log("personal 전송 완료!");
 		    $("#education").addClass("selected-card");
 		    $(".card-name .top").text("where did you");
 		    $(".card-name .bottom").text("learn?");
@@ -60,9 +60,10 @@ var InputSender = (function(){
 	  });
 	  console.log(skillList);
 	  if(true){//InputValidator.skillsValidated()
-		  AJAX.post("/resume/data/skills", skillList)
+		  AJAX.post("/resume/data/skills", "skills="+skillList)
 		  .done(function(){
 			  console.log("skills 전송 완료!");
+			  window.print();
 		  });
 	  }
   }
@@ -77,5 +78,3 @@ var InputSender = (function(){
 	  init : init
   }
 })();
-
- // th:action="@{/resume/data/personal}" method="post"

@@ -114,17 +114,29 @@ public class ResumeDataController {
 	}
 	
 	@RequestMapping(value = "/skills", method = RequestMethod.POST)
-	public @ResponseBody void saveSkillset(@RequestParam String skills){
-		logger.debug(skills);
+	public @ResponseBody void saveSkillset(@RequestParam String skills, HttpSession session){
+		logger.debug("skills 데이터 입력");
+		Integer resumeId = getResumeId(session);
+		Module skillModule = moduleDao.findByDocumentId(resumeId, "resume_skills");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, String> skillset = new HashMap<String, String>();
+		skillset.put("skills", skills);
+		try {
+			String data = mapper.writeValueAsString(skillset);
+			skillModule.setData(data);
+			logger.debug("skill data : {}", data);
+			moduleDao.update(skillModule);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private Integer getResumeId(HttpSession session) {
 		User sessionUser = (User) session.getAttribute("user");
 		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
 		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
-		logger.debug("sessionUser : {}", sessionUser.getEmail());
-		logger.debug("loginedUserId : {}", loginedUser.getId());
-		logger.debug("resume : {}", resume.getId());
 		return resume.getId();
 	}
 }
