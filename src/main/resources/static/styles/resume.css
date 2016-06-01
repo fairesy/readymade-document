@@ -268,6 +268,30 @@ input.invalid{
 	margin-top:10%;
 	margin-left:10%;
 }
+#resume-skills-form{
+	padding:10%;
+}
+#resume-skills-form input[type=checkbox]{
+	width:15px;
+	height:15px;
+	margin-bottom:15px;
+	border:0px;
+	outline:none;
+}
+#resume-skills-form label{
+	width:40%;
+	display:inline-block;
+	color : rgb(243,244,241);
+}
+#resume-skills-form input[type=submit]{
+	height:30px;
+	width:70%;
+	border:0px;
+	background-color: rgb(243,244,241);
+	color: rgb(50,50,50);
+	margin-top:10%;
+	cursor: pointer;
+}
 
 /*for print*/
 .print-button{
