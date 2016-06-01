@@ -19,6 +19,11 @@ var ReadymadeController = (function(){
 		  $(".print_guide").hide();
 		  window.print();
 	  })
+	  $("#resume-education-form .add").on("click", _addEducation);
+  }
+  
+  function _addEducation(){
+	  console.log("학력을 추가합니다!");
   }
   
   function loadResumeData(){

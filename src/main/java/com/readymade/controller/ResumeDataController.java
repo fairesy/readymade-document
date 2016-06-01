@@ -52,6 +52,14 @@ public class ResumeDataController {
 		String data = StaticUtil.wrapEducationData(name, major, state, start_year, end_year);
 		updateModuleData(educationModule, data);
 	}
+	
+	@RequestMapping(value = "/education/create", method = RequestMethod.POST)
+	public void createEducationModule(HttpSession session) throws Exception{
+		String data = StaticUtil.wrapEducationData("", "", "", "", "");
+		Module educationModule = new Module("resume_education", data, getResumeId(session));
+		moduleDao.insert(educationModule);
+		logger.debug("education module 추가 완료");
+	}
 
 	@RequestMapping(value = "/experience", method = RequestMethod.POST)
 	public @ResponseBody void saveExperiences(@RequestParam String name, @RequestParam String description,
