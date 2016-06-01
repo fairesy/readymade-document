@@ -12,13 +12,13 @@ var ReadymadeController = (function(){
   function init(){
 	  InputSender.init();
 	  $(".print-button").on("click", function(){
-		  _personalInputToPrintPart();
-		  _educationInputToPrintPart();
-		  _experienceInputToPrintPart();
-		  _skillsInputToPrintPart();
-		  
-		  window.print();
+		  _setPrintPart();
+		  $(".print_guide").show();
 	  });
+	  $(".print_guide .guide button").on("click", function(){
+		  $(".print_guide").hide();
+		  window.print();
+	  })
   }
   
   function loadResumeData(){
@@ -60,6 +60,13 @@ var ReadymadeController = (function(){
   }
   function _setSkillsCard(skills){
 	  
+  }
+  
+  function _setPrintPart(){
+	  _personalInputToPrintPart();
+	  _educationInputToPrintPart();
+	  _experienceInputToPrintPart();
+	  _skillsInputToPrintPart();
   }
   
   function _personalInputToPrintPart(){

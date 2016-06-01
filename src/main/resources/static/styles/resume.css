@@ -316,6 +316,52 @@ input.invalid{
   background-image: url("../../images/noise.jpg");
 }
 
+.print_guide{
+	position: absolute;
+  top:0;
+  left:0;
+  width: 99.5%;
+  height: 99.5%;
+  background-color: rgba(255,255,255,0.96);
+  font-family: "DINBlack";
+  font-size: 11pt;
+  z-index: 200;
+  display: none;
+}
+.print_guide .guide{
+	width:400px;
+	height:300px;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+	padding-top:50px;
+	box-sizing:border-box;
+	text-align:center;
+}
+.print_guide .guide img{
+	width:70%;
+	border:1px solid grey;
+	margin-top:20px;
+}
+.print_guide .guide button{
+	width:70%;
+	height:40px;
+	border:0px;
+	border-radius:5px;
+	font-size:11pt;
+	margin-top:20px;
+	background-color:rgb(100,100,100);
+	color:rgb(243,244,241);
+	cursor:pointer;
+	transition:.2s ease-in-out;
+}
+.print_guide .guide button:hover{
+	background-color:rgb(150,150,150);
+}
+
 #print-part{
 	display:none;
 }

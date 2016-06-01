@@ -258,6 +258,14 @@
       </div>
     </div>
     
+    <div class="print_guide">
+    	<div class="guide">
+    		<span>최적의 결과를 위해 '배경 그래픽'옵션을 체크해주세요!</span>
+    		<img th:src="@{/images/print_option.png}">
+    		<button>인쇄하기</button>
+    	</div>
+    </div>
+    
     <div class="data_from_db" th:if="${editMode == true}">
 	    <input id="personal_data" type="hidden" th:value="${personal}"/>
 	    <input id="education_data" type="hidden" th:value="${education}"/>

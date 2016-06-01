@@ -72,9 +72,8 @@ var InputSender = (function(){
   }
   
   function init(){
-//	  $(".card .label").on("click", saveAll);
 	  $("#resume-personal-form input[type=submit]").on("click", function(e){
-		  sendPersonalData(e).done(toEducation);//validation 실패할 경우 promise return안됨
+		  sendPersonalData(e).done(toEducation);
 	  });
 	  $("#resume-education-form input[type=submit]").on("click", function(e){
 		  sendEducationData(e).done(toExperience);  
@@ -84,7 +83,7 @@ var InputSender = (function(){
 	  });
 	  $("#resume-skills-form input[type=submit]").on("click", function(e){
 		  sendSkillsData(e).done(function(){
-			  $(".print-button").show();
+			  window.location.replace("/documents/1/edit");
 		  });
 	  });
   }
