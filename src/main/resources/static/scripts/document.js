@@ -1,9 +1,11 @@
 var routes = {
 		"/documents/:documentId/new" : function(documentId){
 			ReadymadeController.init();
+			$(".print-button").hide();
 		},
 		"/documents/:documentId/edit" : function(documentId){
 			ReadymadeController.init();
+			ReadymadeController.loadResumeData();
 			Filter.init();
 		}
 }

@@ -64,6 +64,11 @@ var InputSender = (function(){
 	  sendEducationData(e);
 	  sendExperienceData(e);
 	  sendSkillsData(e);
+	  if(InputValidator.personalValidated() && InputValidator.educationValidated()){
+		  $(".print-button").show();
+	  }else{
+		  $(".print-button").hide();
+	  }
   }
   
   function init(){
@@ -77,7 +82,11 @@ var InputSender = (function(){
 	  $("#resume-experience-form input[type=submit]").on("click", function(e){
 		  sendExperienceData(e).done(toSkills);  
 	  });
-	  $("#resume-skills-form input[type=submit]").on("click", sendSkillsData);
+	  $("#resume-skills-form input[type=submit]").on("click", function(e){
+		  sendSkillsData(e).done(function(){
+			  $(".print-button").show();
+		  });
+	  });
   }
   return {
 	  init : init,

@@ -234,6 +234,7 @@ input.invalid{
 	margin-top:10%;
 	background-color:#007500;
 	font-size:10pt;
+	color:rgb(243,244,241);
 	border-top: 0px;
     border-left: 0px;
     border-right: 0px;
@@ -283,18 +284,28 @@ input.invalid{
 .print-button:hover{
   margin-left: 414px;
 }
-.print-button a{
-	position:absolute;
-	top:0;
-	display:block;
-	width:80px;
-	height:390px;
-}
+
 .print-button .label{
+	position:relative;
   width: 100%;
   height: 100%;
   border-radius: 0 5px 5px 0;
   background-color: rgb(200, 200, 200);
+}
+.print-button .label span{
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    margin-left: 40px;
+    text-align: center;
+    color: rgb(243,244,241);
+    font-size: 10pt;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 .print-button .grain{
   position: absolute;

@@ -254,8 +254,15 @@
       </div>
       <div class="print-button" th:if="${session.user != null}">
         <div class="grain"></div>
-        <div class="label">print</div>
+        <div class="label"><span>print</span></div>
       </div>
+    </div>
+    
+    <div class="data_from_db" th:if="${editMode == true}">
+	    <input id="personal_data" type="hidden" th:value="${personal}"/>
+	    <input id="education_data" type="hidden" th:value="${education}"/>
+	    <input id="experience_data" type="hidden" th:value="${experience}"/>
+	    <input id="skills_data" type="hidden" th:value="${skills}"/>
     </div>
 
     <div id="print-part">

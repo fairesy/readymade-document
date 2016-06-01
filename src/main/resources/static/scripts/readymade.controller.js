@@ -1,29 +1,78 @@
 var ReadymadeController = (function(){
-  
+	var $personal_name_en = $("#resume-personal-form input[name=name_en]");
+	var $personal_name_ko = $("#resume-personal-form input[name=name_ko]");;
+	var $personal_email = $("#resume-personal-form input[name=email]");;
+	var $personal_phone = $("#resume-personal-form input[name=phone]");;
+	var $education_name = $("#resume-education-form input[name=name]");
+	var $education_major = $("#resume-education-form input[name=major]");
+	var $experience_name = $("#resume-experience-form input[name=name]");
+	var $experience_description = $("#resume-experience-form input[name=description]");
+	var $experience_link = $("#resume-experience-form input[name=link]");
+	
   function init(){
 	  InputSender.init();
-//		Filter.init();
-		$(".print-button").on("click", function(){
-			personalInputToPrintPart();
-			educationInputToPrintPart();
-			experienceInputToPrintPart();
-			skillsInputToPrintPart();
-			
-			window.print(); //promise 적용
-		});
+	  $(".print-button").on("click", function(){
+		  _personalInputToPrintPart();
+		  _educationInputToPrintPart();
+		  _experienceInputToPrintPart();
+		  _skillsInputToPrintPart();
+		  
+		  window.print();
+	  });
   }
   
-  function personalInputToPrintPart(){
+  function loadResumeData(){
+	  var personalData = JSON.parse($("#personal_data").val());
+	  var educationData = JSON.parse($("#education_data").val());
+	  var experienceData = JSON.parse($("#experience_data").val());
+	  var skillsData = JSON.parse($("#skills_data").val());
+	  console.log(personalData);
+	  console.log(educationData);
+	  console.log(experienceData);
+	  console.log(skillsData);
+	  _setPersonalCard(personalData);
+	  _setEducationCard(educationData);
+	  _setExperienceCard(experienceData);
+	  _setSkillsCard(skillsData);
+	  
+  }
+  function _setPersonalCard(personal){
+	  $personal_name_en.val(personal.name_en);
+	  $personal_name_ko.val(personal.name_ko);
+	  $personal_email.val(personal.email);
+	  $personal_phone.val(personal.phone);
+  }
+  function _setEducationCard(education){
+	  $education_name.val(education.name);
+	  $education_major.val(education.major);
+	  $("#resume-education-form .state select").val(education.state);
+	  $("#resume-education-form .period select[name=start_year]").val(education.start_year);
+	  $("#resume-education-form .period select[name=end_year]").val(education.end_year);
+  }
+  function _setExperienceCard(experience){
+	  $experience_name.val(experience.name);
+	  $experience_description.val(experience.description);
+	  $experience_link.val(experience.link);
+	  $("#resume-experience-form .period select[name=start_year]").val(experience.start_year);
+	  $("#resume-experience-form .period select[name=start_month]").val(experience.start_month);
+	  $("#resume-experience-form .period select[name=end_year]").val(experience.end_year);
+	  $("#resume-experience-form .period select[name=end_month]").val(experience.end_month);
+  }
+  function _setSkillsCard(skills){
+	  
+  }
+  
+  function _personalInputToPrintPart(){
 		console.log($("#resume-personal-form input[name=name_en]").val());
-		$("#personal-part .name_en").text($("#resume-personal-form input[name=name_en]").val().toUpperCase());
-		$("#personal-part .name_ko").text($("#resume-personal-form input[name=name_ko]").val());
-		$("#personal-part .email").text($("#resume-personal-form input[name=email]").val());
-		$("#personal-part .phone").text($("#resume-personal-form input[name=phone]").val());
+		$("#personal-part .name_en").text($personal_name_en.val().toUpperCase());
+		$("#personal-part .name_ko").text($personal_name_ko.val());
+		$("#personal-part .email").text($personal_email.val());
+		$("#personal-part .phone").text($personal_phone.val());
 	}
   
-  function educationInputToPrintPart(){
-	  var name = $("#resume-education-form input[name=name]").val();
-	  var major = $("#resume-education-form input[name=major]").val();
+  function _educationInputToPrintPart(){
+	  var name = $education_name.val();
+	  var major = $education_major.val();
 	  var state = $("#resume-education-form .state select option:selected").val();
 	  var start_year = $("#resume-education-form .period select[name=start_year] option:selected").val();
 	  var end_year = $("#resume-education-form .period select[name=end_year] option:selected").val();
@@ -33,25 +82,26 @@ var ReadymadeController = (function(){
 	  $("#education-part .education:first .name").text(name + " " + major + " [" + state + "]");
   }
   
-  function experienceInputToPrintPart(){
+  function _experienceInputToPrintPart(){
 	  var start_year = $("#resume-experience-form .period select[name=start_year] option:selected").val();
 	  var start_month = $("#resume-experience-form .period select[name=start_month] option:selected").val();
 	  var end_year = $("#resume-experience-form .period select[name=end_year] option:selected").val();
 	  var end_month = $("#resume-experience-form .period select[name=end_month] option:selected").val();
-	  var name = $("#resume-experience-form input[name=name]").val();
-	  var description = $("#resume-experience-form input[name=description]").val();
-	  var link = $("#resume-experience-form input[name=link]").val();
+	  var name = $experience_name.val();
+	  var description = $experience_description.val();
+	  var link = $experience_link.val();
 	  $("#experience-part .experience:first .period").text(start_year + "." + start_month + " - " + end_year + "." + end_month);
 	  $("#experience-part .experience:first .name").text(name);
 	  $("#experience-part .experience:first .description").text(description);
 	  $("#experience-part .experience:first .link").text(link);
   }
   
-  function skillsInputToPrintPart(){
+  function _skillsInputToPrintPart(){
 	  
   }
 
   return {
-    "init" : init
+    "init" : init,
+    "loadResumeData" : loadResumeData
   }
 })();
