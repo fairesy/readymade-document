@@ -4,6 +4,7 @@ var routes = {
 		},
 		"/documents/:documentId/edit" : function(documentId){
 			ReadymadeController.init();
+			Filter.init();
 		}
 }
 

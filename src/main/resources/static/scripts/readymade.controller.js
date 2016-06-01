@@ -2,7 +2,7 @@ var ReadymadeController = (function(){
   
   function init(){
 	  InputSender.init();
-		Filter.init();
+//		Filter.init();
 		$(".print-button").on("click", function(){
 			personalInputToPrintPart();
 			educationInputToPrintPart();

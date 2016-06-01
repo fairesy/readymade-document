@@ -20,7 +20,7 @@ var InputSender = (function(){
 	  console.log("sending education data")
 	  var education = $("#resume-education-form").serialize();
 	  
-	  if(true){//InputValidator.educationValidated()
+	  if(InputValidator.educationValidated()){
 		  return AJAX.post("/resume/data/education", education);
 	  }
   }
@@ -67,9 +67,9 @@ var InputSender = (function(){
   }
   
   function init(){
-	  $(".card .label").on("click", saveAll);
+//	  $(".card .label").on("click", saveAll);
 	  $("#resume-personal-form input[type=submit]").on("click", function(e){
-		  sendPersonalData(e).done(toEducation);  
+		  sendPersonalData(e).done(toEducation);//validation 실패할 경우 promise return안됨
 	  });
 	  $("#resume-education-form input[type=submit]").on("click", function(e){
 		  sendEducationData(e).done(toExperience);  
@@ -80,6 +80,7 @@ var InputSender = (function(){
 	  $("#resume-skills-form input[type=submit]").on("click", sendSkillsData);
   }
   return {
-	  init : init
+	  init : init,
+	  saveAll : saveAll
   }
 })();

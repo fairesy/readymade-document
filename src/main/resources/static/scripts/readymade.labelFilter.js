@@ -22,6 +22,9 @@ var Filter = (function(){
 	}
 	function init(){
 		$(".card .label").on("click", function(e){
+			
+			InputSender.saveAll(e);
+			
 			if($(".selected-card")){
 				$(".selected-card").removeClass("selected-card");
 			}

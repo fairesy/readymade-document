@@ -154,7 +154,10 @@
 }
 
 input.invalid{
-	border-color: rgb(236,58,52);
+	border-bottom: 4px solid rgb(236,58,52);
+}
+.invalid{
+	border-color:rgb(236,58,52);
 }
 
 .card .education{

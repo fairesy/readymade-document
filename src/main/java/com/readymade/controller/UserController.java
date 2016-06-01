@@ -32,7 +32,7 @@ public class UserController {
 	DocumentDao documentDao;
 	
 	@RequestMapping(value = "/users/join", method = RequestMethod.POST)
-	public ModelAndView post(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes redir) {
+	public ModelAndView post(@ModelAttribute("user") @Valid User user, BindingResult result, RedirectAttributes redir) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		if(result.hasErrors()){
@@ -43,17 +43,20 @@ public class UserController {
 			return mav;
 		}
 		
+		if(userDao.findByEmail(user.getEmail()) != null){
+			logger.debug("이미 가입된 이메일입니다.");
+			mav.setViewName("redirect:/#/users/form");
+			redir.addFlashAttribute("errorMessage", "이미 가입된 이메일입니다.");
+			return mav;
+		}
+		
 		logger.debug("user : {}", user);
 		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		logger.debug("hashed : {}", hashedPassword);
 		User newUser = new User(user.getEmail(), hashedPassword);
 
-		try {
-			userDao.insert(newUser);
-			logger.debug("새로운 유저 가입이 완료되었습니다.");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		userDao.insert(newUser);
+		logger.debug("새로운 유저 가입이 완료되었습니다.");
+
 		mav.setViewName("redirect:/#/users/login");
 		
 		return mav;

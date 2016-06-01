@@ -28,6 +28,7 @@ import com.readymade.model.User;
 public class ResumeDataController {
 	
 	private Logger logger = LoggerFactory.getLogger(ResumeDataController.class);
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
 	UserDao userDao;
@@ -38,99 +39,93 @@ public class ResumeDataController {
 	
 	@RequestMapping(value = "/personal", method = RequestMethod.POST)
 	public @ResponseBody void savePersonalData(@RequestParam String name_ko, @RequestParam String name_en, 
-			@RequestParam String email, @RequestParam String phone, HttpSession session){
+			@RequestParam String email, @RequestParam String phone, HttpSession session) throws JsonProcessingException{
 		logger.debug("personal 데이터 입력");
+		Module personalModule = findModule(session, "resume_personal");
+		String data = wrapPersonalData(name_ko, name_en, email, phone);
+		updateModuleData(personalModule, data);
+	}
 
-		Integer resumeId = getResumeId(session);
-		Module personalModule = moduleDao.findByDocumentId(resumeId, "resume_personal"); //null
-		
-		ObjectMapper mapper = new ObjectMapper();
+	@RequestMapping(value = "/education", method = RequestMethod.POST)
+	public @ResponseBody void saveEducationData(@RequestParam String name, 
+			@RequestParam String major, @RequestParam String state,
+			@RequestParam String start_year, @RequestParam String end_year, HttpSession session) throws JsonProcessingException{
+		logger.debug("education 데이터 입력");
+		Module educationModule = findModule(session, "resume_education");
+		String data = wrapEducationData(name, major, state, start_year, end_year);
+		updateModuleData(educationModule, data);
+	}
+
+	@RequestMapping(value = "/experience", method = RequestMethod.POST)
+	public @ResponseBody void saveExperiences(@RequestParam String name, @RequestParam String description,
+			@RequestParam String start_year, @RequestParam String start_month,
+			@RequestParam String end_year, @RequestParam String end_month,
+			@RequestParam String link, HttpSession session) throws JsonProcessingException{
+		logger.debug("experience 데이터 입력");
+		Module experienceModule = findModule(session, "resume_experience");
+		String data = wrapExperienceData(name, description, start_year, start_month, end_year, end_month, link);
+		updateModuleData(experienceModule, data);
+	}
+
+	@RequestMapping(value = "/skills", method = RequestMethod.POST)
+	public @ResponseBody void saveSkillset(@RequestParam String skills, HttpSession session) throws JsonProcessingException{
+		logger.debug("skills 데이터 입력");
+		Module skillModule = findModule(session, "resume_skills");
+		String data = wrapSkillsData(skills);
+		updateModuleData(skillModule, data);
+	}
+
+	private void updateModuleData(Module module, String data) {
+		module.setData(data);
+		moduleDao.update(module);
+	}
+
+	private String wrapPersonalData(String name_ko, String name_en, String email, String phone) throws JsonProcessingException{
 		HashMap<String, String> personal = new HashMap<String, String>();
 		personal.put("phone", phone);
 		personal.put("email", email);
 		personal.put("name_en", name_en);
 		personal.put("name_ko", name_ko);
-		try {
-			String data = mapper.writeValueAsString(personal);
-			logger.debug("personal data : {}", data);
-			logger.debug("personal module : {}", personalModule);
-			personalModule.setData(data); //null pointer exception 
-			moduleDao.update(personalModule);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		String data = mapper.writeValueAsString(personal);
+		logger.debug("personal data : {}", data);
+		return data;
 	}
 
-
-	@RequestMapping(value = "/education", method = RequestMethod.POST)
-	public @ResponseBody void saveEducationData(@RequestParam String name, 
-			@RequestParam String major, @RequestParam String state,
-			@RequestParam String start_year, @RequestParam String end_year, HttpSession session){
-		logger.debug("education 데이터 입력");
-		Integer resumeId = getResumeId(session);
-		Module educationModule = moduleDao.findByDocumentId(resumeId, "resume_education");
-		
-		ObjectMapper mapper = new ObjectMapper();
+	private String wrapEducationData(String name, String major, String state, String start_year, String end_year)
+			throws JsonProcessingException {
 		HashMap<String, String> education = new HashMap<String, String>();
 		education.put("name", name);
 		education.put("major", major);
 		education.put("state", state);
 		education.put("start_year", start_year);
 		education.put("end_year", end_year);
-		try {
-			String data = mapper.writeValueAsString(education);
-			educationModule.setData(data);
-			logger.debug("education data : {}", data);
-			moduleDao.update(educationModule);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		
+		String data = mapper.writeValueAsString(education);
+		logger.debug("education data : {}", data);
+		return data;
 	}
 	
-	@RequestMapping(value = "/experience", method = RequestMethod.POST)
-	public @ResponseBody void saveExperiences(@RequestParam String name, @RequestParam String description,
-			@RequestParam String start_year, @RequestParam String start_month,
-			@RequestParam String end_year, @RequestParam String end_month,
-			@RequestParam String link, HttpSession session){
-		logger.debug("experience 데이터 입력");
-		Integer resumeId = getResumeId(session);
-		Module experienceModule = moduleDao.findByDocumentId(resumeId, "resume_experience");
-		
-		ObjectMapper mapper = new ObjectMapper();
+	private String wrapExperienceData(String name, String description, String start_year, String start_month,
+			String end_year, String end_month, String link) throws JsonProcessingException {
 		HashMap<String, String> experience = new HashMap<String, String>();
 		experience.put("name", name);
 		experience.put("description", description);
 		experience.put("start", start_year + "." + start_month);
 		experience.put("end", end_year + "." + end_month);
 		experience.put("link", link);
-		try {
-			String data = mapper.writeValueAsString(experience);
-			experienceModule.setData(data);
-			logger.debug("experience data : {}", data);
-			moduleDao.update(experienceModule);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@RequestMapping(value = "/skills", method = RequestMethod.POST)
-	public @ResponseBody void saveSkillset(@RequestParam String skills, HttpSession session){
-		logger.debug("skills 데이터 입력");
-		Integer resumeId = getResumeId(session);
-		Module skillModule = moduleDao.findByDocumentId(resumeId, "resume_skills");
 		
-		ObjectMapper mapper = new ObjectMapper();
+		String data = mapper.writeValueAsString(experience);
+		logger.debug("experience data : {}", data);
+		return data;
+	}
+
+	private String wrapSkillsData(String skills) throws JsonProcessingException {
 		HashMap<String, String> skillset = new HashMap<String, String>();
 		skillset.put("skills", skills);
-		try {
-			String data = mapper.writeValueAsString(skillset);
-			skillModule.setData(data);
-			logger.debug("skill data : {}", data);
-			moduleDao.update(skillModule);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
 		
+		String data = mapper.writeValueAsString(skillset);
+		logger.debug("skill data : {}", data);
+		return data;
 	}
 	
 	private Integer getResumeId(HttpSession session) {
@@ -138,5 +133,11 @@ public class ResumeDataController {
 		User loginedUser = userDao.findByEmail(sessionUser.getEmail());
 		Document resume = documentDao.findResumeByUserId(loginedUser.getId());
 		return resume.getId();
+	}
+	
+	private Module findModule(HttpSession session, String moduleType) {
+		Integer resumeId = getResumeId(session);
+		Module personalModule = moduleDao.findByDocumentId(resumeId, moduleType);
+		return personalModule;
 	}
 }
