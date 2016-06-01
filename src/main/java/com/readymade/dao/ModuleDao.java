@@ -13,9 +13,11 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.readymade.model.Module;
 
+@Transactional
 @Repository
 public class ModuleDao {
 	@Autowired
@@ -33,6 +35,7 @@ public class ModuleDao {
 		return module;
 	}
 
+	@Transactional(readOnly=true)
 	public Module findByDocumentId(Integer document_id, String type) {
 		String sql = "SELECT * FROM module WHERE type = '"+type+"' AND document_id = :document_id";
 		SqlParameterSource namedParameters = new MapSqlParameterSource("document_id", Integer.valueOf(document_id));

@@ -10,9 +10,11 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.readymade.model.User;
 
+@Transactional
 @Repository
 public class UserDao {
 	@Autowired
@@ -30,6 +32,7 @@ public class UserDao {
 		return user;
 	}
 	
+	@Transactional(readOnly=true)
 	public User findByEmail(String email) {
 		String sql = "SELECT * FROM user WHERE email = :email";
 	    SqlParameterSource namedParameters = new MapSqlParameterSource("email", email);

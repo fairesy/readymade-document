@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,10 +13,11 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.readymade.model.Document;
 
-
+@Transactional
 @Repository
 public class DocumentDao {
 	@Autowired
@@ -35,6 +35,7 @@ public class DocumentDao {
 		return document;
 	}
 
+	@Transactional(readOnly=true)
 	public Document findByUserId(int user_id) {
 		String sql = "SELECT * FROM document WHERE user_id = :user_id";
 	    SqlParameterSource namedParameters = new MapSqlParameterSource("user_id", Integer.valueOf(user_id));
@@ -49,6 +50,7 @@ public class DocumentDao {
         return DataAccessUtils.singleResult(jdbcTemplate.query(sql, namedParameters, rm));
 	}
 
+	@Transactional(readOnly=true)
 	public Document findResumeByUserId(Integer user_id) {
 		String sql = "SELECT * FROM document WHERE user_id = :user_id AND type = 'resume_default'";
 		SqlParameterSource namedParameters = new MapSqlParameterSource("user_id", user_id);
