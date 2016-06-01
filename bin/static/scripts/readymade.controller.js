@@ -64,7 +64,12 @@ var ReadymadeController = (function(){
 	  $("#resume-experience-form .period select[name=end_month]").val(experience.end_month);
   }
   function _setSkillsCard(skills){
-	  
+	  var data = skills.skills.split("-");
+	  var skillList = data.slice(0, data.length-1);
+	  $(skillList).each(function(index, value){
+		  var selector = "#resume-skills-form input[name=" + value + "]";
+		  $(selector).prop("checked", true);
+	  });
   }
   
   function _setPrintPart(){
@@ -109,7 +114,11 @@ var ReadymadeController = (function(){
   }
   
   function _skillsInputToPrintPart(){
-	  
+	  $("#skills-part .skill-list").empty();
+	  $("#resume-skills-form input:checked").each(function(id, item){
+		  var skillName = $(item).val();
+		  $("#skills-part .skill-list").append($("<div>").addClass("skill").text(skillName));
+	  });
   }
 
   return {

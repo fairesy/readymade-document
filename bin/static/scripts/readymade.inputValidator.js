@@ -95,6 +95,32 @@ var InputValidator = (function(){
 		return isValidated;
 	}
 	
+	function validateExperienceCard(){
+		var isValidated = false;
+		var $name = $("#resume-experience-form input[name=name]");
+		var isName = false;
+		var $description = $("#resume-experience-form input[name=description]");
+		var isDescription = false;
+		if(validator.isNull($name.val())){
+			$name.addClass("invalid");
+		}else{
+			isName = true;
+			$name.removeClass("invalid");
+		}
+		if(validator.isNull($description.val())){
+			$description.addClass("invalid");
+		}else{
+			isDescription = true;
+			$description.removeClass("invalid");
+		}
+		
+		if(isName && isDescription){
+			isValidated = true;
+		}
+		
+		return isValidated;
+	}
+	
 	return {
 		personalValidated : validatePersonalCard,
 		educationValidated : validateEducationCard

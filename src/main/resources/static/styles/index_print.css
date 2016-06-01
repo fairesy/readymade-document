@@ -101,6 +101,22 @@ nav, main, .label, input, .card, .card-name{
 	font-size:10pt;
 	padding-left:0.5cm;
 }
+#skills-part .section-title{
+	margin-bottom:0.5cm;
+}
+#skills-part .skill-list{
+	width:600px;
+	margin:0 auto;
+}
+#skills-part .skill{
+	width:100px;
+	height:40px;
+	line-height:40px;
+	font-size:10pt;
+	float:left;
+/* 	border: 1px solid red;
+ */	text-align:center;
+}
 
 .section-title .line{
 	height:0.02cm;
