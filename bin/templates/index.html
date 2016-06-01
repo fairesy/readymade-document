@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko"  xml:lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta property="og:title" content="ready-made document"/>
-	<meta property="og:description" content="간편하게 이력서 만들기"/>
-	<meta property="og:image" content="../static/images/og_image.png"/>
+	<meta name="description" th:attr="content='간편하게 이력서 만들기'">
+	<meta property="og:title" th:attr="content='ready-made document'"/>
+	<meta property="og:description" th:attr="content='간편하게 이력서 만들기'"/>
+	<meta property="og:image" th:attr="content='http://imgur.com/coLqHAJ'"/>
 	<title>ready-made document</title>
-	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="shortcut icon" th:href="@{/favicon.ico}">
 	<link rel="stylesheet" th:href="@{/styles/font.css}" media="screen">
 	<link rel="stylesheet" th:href="@{/styles/nav.css}" media="screen">
 	<link rel="stylesheet" th:href="@{/styles/index.css}" media="screen">
