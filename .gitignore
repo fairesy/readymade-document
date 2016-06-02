@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/sp,osx,java,gradle
 
+src/main/resources/application.properties
+
 #!! ERROR: sp is undefined. Use list command to see defined gitignore types !!#
 
 ### OSX ###
