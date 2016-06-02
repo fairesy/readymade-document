@@ -1,4 +1,4 @@
-# readymade-document : [sososimsim.com](sososimsim.com)
+# readymade-document : [sososimsim.com](http://sososimsim.com)
 ![readymade](https://cloud.githubusercontent.com/assets/7744615/15308784/c54b175e-1c1b-11e6-966e-735178742cff.png)
 #### **ready-made document**는 문서 디자인을 돕기 위해 제작된 사이트입니다. 
 현재는 **개발자를 대상으로 한 one page resume** 템플릿만을 제공하고 있습니다. 가입/로그인 후 아이콘을 클릭하면 이력서 작성을 시작하실 수 있습니다. 
